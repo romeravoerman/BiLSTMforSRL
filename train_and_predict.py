@@ -106,7 +106,7 @@ def get_bilstm_lstm_model(embedding_matrix, embedding_dim, input_length, output_
     return model
 
 
-def train_model(X, y, model):
+def train_model(X, y, model, epochs, batch_size):
     """Train a given Keras model on input-output pairs (X, y).
 
     Args:
@@ -122,7 +122,7 @@ def train_model(X, y, model):
     # set epochs to 3 (from 25) (you can change this)
     for i in range(3):
         # fit model for one epoch on this sequence
-        hist = model.fit(X, y, batch_size=200, verbose=1, epochs=3, validation_split=0.2)
+        hist = model.fit(X, y, batch_size=batch_size, verbose=1, epochs=epochs, validation_split=0.2)
         loss.append(hist.history['loss'][0])
     return loss
 
