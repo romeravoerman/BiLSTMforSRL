@@ -2,8 +2,8 @@
 This GitHub Repository contains the files for the class Advanced NLP at VU Amsterdam by Romera Voerman (2686014). 
 
 This repository contains the following directories:
-- Data: directory holding the original .conllu files and the adapted files
-- Models: the wordembedding model is included
+- Data: directory holding the original .conllu files and the adapted files obtained from: https://github.com/UniversalPropositions/UP-1.0
+- Models: the wordembedding should be added here, obtained from: https://www.kaggle.com/datasets/leadbest/googlenewsvectorsnegative300
 
 This repository contains the following files:
 - requirements.txt: a file listing all the requirements to run the code
