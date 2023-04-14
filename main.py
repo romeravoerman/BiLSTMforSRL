@@ -10,17 +10,23 @@ path_eval = 'Data/en_ewt-up-dev.conllu'
 path_test = 'Data/en_ewt-up-test.conllu'
 paths = [path_train, path_eval, path_test]
 
-# Change to test when you are evaluating on test-set:
-eval_split = 'test'
-
 # Embedding model
 path_emb = 'Models/GoogleNews-vectors-negative300.bin'
 
 def main(argv=None):
+    """
+    Implementation of BiLSTM model for Semanting Role Labeling and making predictions
+
+    :param argv[0]: the number of epochs
+    :param argv[1]: the batch size
+    :param argv[2]: eval_split (default="dev", for evaluating on test data mention "test")
+    """
+
     if argv is None:
         argv = sys.argv
-    else:
-        None
+    epochs = int(argv[0])
+    batch_size = int(arg[1])
+    eval_split =argv[2]
 
     data = convert_conll_to_df(paths)
     token2idx, idx2token = get_dict_map(data, 'TOKEN')
@@ -38,7 +44,7 @@ def main(argv=None):
     input_dim, output_dim, input_length, n_tags = build_model(data, emb_dim, data_grouped, tag2idx)
     model_bilstm = get_bilstm_lstm_model(emb_matrix, emb_dim, input_length, output_dim, n_tags, token2idx)
     plot_model(model_bilstm)
-    results['with_add_lstm_3epochs'] = train_model(train_tokens, train_tags, model_bilstm)
+    results['with_add_lstm_3epochs'] = train_model(train_tokens, train_tags, model_bilstm, epochs, batch_size)
     y_pred = model_bilstm.predict(eval_tokens)
 
     evaluate(y_pred, eval_tags)
